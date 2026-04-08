@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Cash App (Dark)</title>
+<style>
+  :root{
+    --bg:#040505;--surface:#111414;--surface-2:#1b1f1f;--line:rgba(255,255,255,.14);--line-soft:rgba(255,255,255,.08);
+    --text:#fff;--text-soft:#e7eaed;--muted:#b8bdc3;--muted-2:#707678;
+    --green:#00e013;--green-soft:#91ffb0;--azure:#0978fa;--cobalt:#3859ff;--citron:#d8ff14;--orange:#ff713a;--magenta:#ff2acc;--purple:#ab30f7;--scarlet:#ed3434;
+    --radius:14px;--radius-lg:24px;--shadow:0 20px 56px rgba(0,0,0,.45);
+    --font-sans:"Cash Sans","Sohne","Inter",system-ui,sans-serif;--font-wide:"Cash Sans Wide","Cash Sans","Sohne","Inter",system-ui,sans-serif;--font-mono:"Cash Sans Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{
+    font-family:var(--font-sans);color:var(--text);
+    background:
+      radial-gradient(circle at 90% 0%,rgba(0,224,19,.16),transparent 24%),
+      radial-gradient(circle at 0% 20%,rgba(171,48,247,.14),transparent 24%),
+      linear-gradient(180deg,#030404,var(--bg));
+  }
+  .page{max-width:1240px;margin:0 auto;padding:18px}
+  .panel{border:1px solid var(--line);border-radius:var(--radius);background:rgba(17,20,20,.9);box-shadow:var(--shadow)}
+  .topbar{position:sticky;top:10px;z-index:30;padding:10px 12px;border-radius:999px;display:flex;align-items:center;justify-content:space-between;gap:10px;backdrop-filter:blur(8px)}
+  .topbar .brand{font:700 12px/1 var(--font-mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  .nav{display:flex;gap:8px;flex-wrap:wrap}
+  .nav a{color:var(--muted);text-decoration:none;font-size:12px;padding:6px 10px;border:1px solid var(--line-soft);border-radius:999px}
+  .hero{margin-top:14px;padding:28px;display:grid;grid-template-columns:1.4fr 1fr;gap:12px;border-radius:var(--radius-lg);
+    background:
+      radial-gradient(circle at right 20%,rgba(0,224,19,.16),transparent 32%),
+      radial-gradient(circle at left 78%,rgba(9,120,250,.17),transparent 34%),
+      rgba(17,20,20,.92)}
+  .eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--green);color:#020302;font:700 11px/1 var(--font-mono);text-transform:uppercase;letter-spacing:.07em}
+  h1{margin:12px 0 10px;font-family:var(--font-wide);font-size:clamp(42px,7vw,84px);line-height:.93;letter-spacing:-.04em;max-width:9ch}
+  .hero p{margin:0;color:var(--text-soft);font-size:19px;line-height:1.3;max-width:60ch}
+  .actions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+  .btn{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--line)}
+  .btn.primary{background:var(--green);color:#050505;border-color:transparent}
+  .btn.secondary{background:rgba(255,255,255,.03);color:var(--text)}
+  .stat-grid{display:grid;gap:8px}
+  .stat{border:1px solid var(--line-soft);border-radius:10px;background:rgba(3,4,4,.5);padding:12px}
+  .stat .k{font:700 10px/1 var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .stat .v{margin-top:7px;font-family:var(--font-wide);font-size:28px;line-height:.96}
+  .stat .d{margin-top:7px;font-size:12px;color:var(--muted)}
+  .section{margin-top:12px;padding:18px}
+  .head{display:flex;justify-content:space-between;align-items:end;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line-soft);margin-bottom:12px}
+  .head h2{margin:0;font-family:var(--font-wide);font-size:30px;line-height:1;letter-spacing:-.03em}
+  .head p{margin:0;max-width:44ch;font-size:13px;color:var(--muted);line-height:1.35}
+  .grid{display:grid;gap:8px}
+  .grid.palette{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+  .swatch{border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;background:rgba(3,4,4,.45)}
+  .swatch .c{height:74px}
+  .swatch .m{padding:9px}
+  .swatch .n{font-size:13px;font-weight:700}
+  .swatch .h{margin-top:3px;font:12px/1.2 var(--font-mono);color:var(--muted)}
+  .swatch .r{margin-top:5px;font-size:12px;color:var(--muted-2)}
+  .families{margin-top:8px;display:grid;gap:8px}
+  .family{border:1px solid var(--line-soft);border-radius:10px;padding:9px;background:rgba(3,4,4,.45)}
+  .family .label{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{width:26px;height:26px;border-radius:7px;border:1px solid var(--line-soft)}
+  .type-card{border:1px solid var(--line-soft);border-radius:10px;padding:12px;background:rgba(3,4,4,.45)}
+  .t90{font-family:var(--font-wide);font-size:clamp(40px,6.5vw,76px);line-height:.93;letter-spacing:-.04em}
+  .t48{font-family:var(--font-wide);font-size:clamp(30px,4.6vw,46px);line-height:1}
+  .tbody{font-size:16px;line-height:1.35;color:var(--text-soft);max-width:66ch}
+  .tmono{font:12px/1.4 var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .meta{margin-top:7px;font:11px/1.3 var(--font-mono);color:var(--muted)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pane{border:1px solid var(--line-soft);border-radius:10px;padding:12px;background:rgba(3,4,4,.45)}
+  .pane h3{margin:0 0 8px;font-size:18px}
+  .pane p{margin:0;font-size:13px;color:var(--muted);line-height:1.35}
+  .tiles{margin-top:8px;display:grid;gap:7px}
+  .tile{border:1px solid var(--line-soft);border-radius:9px;padding:9px;background:rgba(255,255,255,.02)}
+  .tile .k{font:10px/1 var(--font-mono);color:var(--muted-2);text-transform:uppercase;letter-spacing:.08em}
+  .tile .v{margin-top:6px;font-size:13px;color:var(--text-soft)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{border:1px solid var(--line-soft);padding:8px 9px;text-align:left}
+  th{font:11px/1 var(--font-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .pass{color:#00f55e;font-weight:700}.fail{color:#ff7c8b;font-weight:700}
+  .state-grid,.lang-grid,.logo-grid,.motion-grid{display:grid;gap:8px}
+  .state-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .state,.lang,.logo,.motion{border:1px solid var(--line-soft);border-radius:10px;padding:11px;background:rgba(3,4,4,.45)}
+  .state .title{font-size:15px;font-weight:700}.state .msg{margin-top:6px;font-size:13px;color:var(--muted);line-height:1.35}
+  .state .cta{margin-top:9px;display:inline-flex;min-height:34px;align-items:center;padding:0 12px;border-radius:999px;border:1px solid var(--line);font-size:13px;text-decoration:none;color:var(--text)}
+  .state .cta.primary{background:var(--green);border-color:transparent;color:#050505}
+  .lang-grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .lang .code{font:10px/1 var(--font-mono);color:var(--muted-2);letter-spacing:.08em;text-transform:uppercase}
+  .lang .sample{margin-top:6px;font-size:14px;color:var(--text-soft);line-height:1.35}
+  .logo-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .logo{border-style:dashed;min-height:122px;display:grid;align-content:space-between}
+  .logo .spec{font:10px/1 var(--font-mono);color:var(--muted-2);letter-spacing:.08em;text-transform:uppercase}
+  .word{font-family:var(--font-wide);font-size:26px;letter-spacing:-.03em}
+  .symbol{width:46px;height:46px;border-radius:12px;background:var(--green);border:1px solid rgba(0,0,0,.25)}
+  .stack{display:grid;gap:6px}
+  .lock{display:flex;align-items:center;gap:7px;font-weight:600}
+  .plus{color:var(--muted-2)}
+  .nav-demo{display:grid;gap:8px}
+  .desktop{border:1px solid var(--line-soft);border-radius:10px;padding:8px;background:rgba(3,4,4,.45);display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .links{display:flex;gap:7px;flex-wrap:wrap}
+  .link{min-height:33px;display:inline-flex;align-items:center;padding:0 11px;border:1px solid var(--line-soft);border-radius:0;font-size:13px;color:var(--muted);text-decoration:none}
+  .link.active{color:var(--text);border-color:var(--line)}
+  .mobile{border:1px solid var(--line-soft);border-radius:10px;padding:8px;background:rgba(3,4,4,.45);display:grid;gap:8px}
+  .mobile-top{display:flex;justify-content:space-between;align-items:center}
+  .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+  .tab{min-height:35px;display:grid;place-items:center;border:1px solid var(--line-soft);border-radius:8px;font-size:12px;color:var(--muted)}
+  .tab.live{background:var(--green);color:#050505;border-color:transparent;font-weight:700}
+  .motion-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .canvas{height:88px;border:1px solid var(--line-soft);border-radius:9px;background:rgba(255,255,255,.02);position:relative;overflow:hidden}
+  .dot{width:18px;height:18px;border-radius:999px;position:absolute}
+  .g{background:var(--green)} .a{background:var(--azure)} .m{background:var(--magenta)}
+  .slide{top:35px;left:7px;animation:slide 2.3s ease-in-out infinite alternate}
+  .pulse{top:35px;left:calc(50% - 9px);animation:pulse 1.8s ease-in-out infinite}
+  .stacked{top:35px;left:calc(100% - 26px);animation:stack 2.5s ease-in-out infinite}
+  .motion p{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.35}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(calc(100% - 34px))}}
+  @keyframes pulse{0%,100%{transform:scale(.8);opacity:.75}50%{transform:scale(1.2);opacity:1}}
+  @keyframes stack{0%{transform:translateY(0)}35%{transform:translateY(-18px)}70%{transform:translateY(11px)}100%{transform:translateY(0)}}
+  .foot{margin-top:10px;padding:10px;border:1px solid var(--line-soft);border-radius:10px;background:rgba(3,4,4,.45);font-size:12px;color:var(--muted);line-height:1.35}
+  @media (max-width:980px){.hero,.split{grid-template-columns:1fr}}
+  @media (max-width:740px){
+    .page{padding:10px}.topbar{border-radius:14px}.nav{display:none}.hero,.section{padding:12px;border-radius:12px}
+    .head{align-items:start;flex-direction:column}.head h2{font-size:25px}.hero p{font-size:16px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <nav class="panel topbar">
+      <div class="brand">Cash App Dark / System Preview</div>
+      <div class="nav">
+        <a href="#palette-core">Core</a><a href="#palette-families">Families</a><a href="#type">Type</a><a href="#usage">Usage</a><a href="#a11y">A11y</a><a href="#states">States</a><a href="#language">Language</a><a href="#logo">Logo</a><a href="#navs">Nav</a><a href="#motion">Motion</a>
+      </div>
+    </nav>
+
+    <section class="panel hero">
+      <div>
+        <span class="eyebrow">Dark Mode Profile</span>
+        <h1>Structured order. Explosive signal.</h1>
+        <p>This is a full system preview, not only tokens. It visualizes dark palette logic, typography, everyday versus expressive usage, contrast checks, messaging states, language pressure, logo variants, navigation patterns, and motion behavior.</p>
+        <div class="actions">
+          <a class="btn primary" href="#">Primary Action</a>
+          <a class="btn secondary" href="#">Secondary Action</a>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <article class="stat"><div class="k">Core Accent</div><div class="v">#00E013</div><div class="d">Cash Green stays the decisive focal color.</div></article>
+        <article class="stat"><div class="k">Display Rule</div><div class="v">90 / -3%</div><div class="d">Wide display, tight leading, negative tracking.</div></article>
+        <article class="stat"><div class="k">Utility Density</div><div class="v">33-35px</div><div class="d">Compact navigation rows and controls.</div></article>
+      </div>
+    </section>
+
+    <section class="panel section" id="palette-core">
+      <div class="head"><h2>Core Palette</h2><p>Cash Green stays the key recall signal. Neutrals carry structure and readability before accents enter the scene.</p></div>
+      <div class="grid palette">
+        <article class="swatch"><div class="c" style="background:#00e013"></div><div class="m"><div class="n">Cash Green</div><div class="h">#00E013</div><div class="r">Primary brand signal</div></div></article>
+        <article class="swatch"><div class="c" style="background:#00bf2c"></div><div class="m"><div class="n">Cash Green Strong</div><div class="h">#00BF2C</div><div class="r">Stronger action state</div></div></article>
+        <article class="swatch"><div class="c" style="background:#91ffb0"></div><div class="m"><div class="n">Cash Green Soft</div><div class="h">#91FFB0</div><div class="r">Supportive highlight</div></div></article>
+        <article class="swatch"><div class="c" style="background:#f1f4f6"></div><div class="m"><div class="n">Gray 1</div><div class="h">#F1F4F6</div><div class="r">Light neutral reference</div></div></article>
+        <article class="swatch"><div class="c" style="background:#d8dbe1"></div><div class="m"><div class="n">Gray 4</div><div class="h">#D8DBE1</div><div class="r">Borders and dividers</div></div></article>
+        <article class="swatch"><div class="c" style="background:#707678"></div><div class="m"><div class="n">Gray 15</div><div class="h">#707678</div><div class="r">Muted supporting text</div></div></article>
+        <article class="swatch"><div class="c" style="background:#353838"></div><div class="m"><div class="n">Gray 18</div><div class="h">#353838</div><div class="r">Dark utility</div></div></article>
+        <article class="swatch"><div class="c" style="background:#000000"></div><div class="m"><div class="n">Black</div><div class="h">#000000</div><div class="r">Base background</div></div></article>
+      </div>
+    </section>
+
+    <section class="panel section" id="palette-families">
+      <div class="head"><h2>Extended Palette Families</h2><p>The source system includes full color families. Keep them coherent and intentional instead of mixing randomly.</p></div>
+      <div class="grid palette">
+        <article class="swatch"><div class="c" style="background:#0978fa"></div><div class="m"><div class="n">Azure H1</div><div class="h">#0978FA</div><div class="r">Cool informational accent</div></div></article>
+        <article class="swatch"><div class="c" style="background:#3859ff"></div><div class="m"><div class="n">Cobalt H3</div><div class="h">#3859FF</div><div class="r">Deeper blue emphasis</div></div></article>
+        <article class="swatch"><div class="c" style="background:#d8ff14"></div><div class="m"><div class="n">Citron</div><div class="h">#D8FF14</div><div class="r">High-energy highlight</div></div></article>
+        <article class="swatch"><div class="c" style="background:#ff713a"></div><div class="m"><div class="n">Orange H1</div><div class="h">#FF713A</div><div class="r">Warm promotional accent</div></div></article>
+        <article class="swatch"><div class="c" style="background:#ff2acc"></div><div class="m"><div class="n">Magenta H4</div><div class="h">#FF2ACC</div><div class="r">Expressive campaign color</div></div></article>
+        <article class="swatch"><div class="c" style="background:#ab30f7"></div><div class="m"><div class="n">Purple H3</div><div class="h">#AB30F7</div><div class="r">Editorial contrast color</div></div></article>
+        <article class="swatch"><div class="c" style="background:#ed3434"></div><div class="m"><div class="n">Scarlet H1</div><div class="h">#ED3434</div><div class="r">Urgent or energetic signal</div></div></article>
+        <article class="swatch"><div class="c" style="background:#fed31c"></div><div class="m"><div class="n">Gold H1</div><div class="h">#FED31C</div><div class="r">Bright accent field</div></div></article>
+      </div>
+      <div class="families">
+        <article class="family"><div class="label">Azure Family</div><div class="chips"><div class="chip" style="background:#043163"></div><div class="chip" style="background:#0978fa"></div><div class="chip" style="background:#66cfff"></div><div class="chip" style="background:#e0f5ff"></div></div></article>
+        <article class="family"><div class="label">Purple Family</div><div class="chips"><div class="chip" style="background:#390552"></div><div class="chip" style="background:#ab30f7"></div><div class="chip" style="background:#cb85ff"></div><div class="chip" style="background:#f2e6ff"></div></div></article>
+        <article class="family"><div class="label">Orange Family</div><div class="chips"><div class="chip" style="background:#822b0a"></div><div class="chip" style="background:#ff713a"></div><div class="chip" style="background:#ffc44f"></div><div class="chip" style="background:#fff6e3"></div></div></article>
+      </div>
+    </section>
+
+    <section class="panel section" id="type">
+      <div class="head"><h2>Typography Scale</h2><p>Display stays wide and decisive. Mono is for utility labels and technical notes, not expressive headlines.</p></div>
+      <article class="type-card"><div class="t90">Money should move like this.</div><div class="meta">Display / Cash Sans Wide / 90px / line-height 1.00 / tracking -3%</div></article>
+      <article class="type-card"><div class="t48">Readable at speed.</div><div class="meta">Section Heading / Cash Sans Wide / 48px</div></article>
+      <article class="type-card"><div class="tbody">Rounded punctuation and clear hierarchy keep tone approachable while preserving precision for high-stakes product flows.</div><div class="meta">Body / Cash Sans / 14-16px / line-height 1.20-1.35</div></article>
+      <article class="type-card"><div class="tmono">spec label / token / utility</div><div class="meta">Mono / Cash Sans Mono / avoid for expressive headlines</div></article>
+    </section>
+
+    <section class="panel section" id="usage">
+      <div class="head"><h2>Everyday vs Expressive</h2><p>Calm product usage and high-energy expressive usage follow the same legibility rules.</p></div>
+      <div class="split">
+        <article class="pane">
+          <h3>Everyday Usage</h3><p>Neutral-heavy surfaces, single accent, high information clarity, minimal ornament.</p>
+          <div class="tiles">
+            <div class="tile"><div class="k">Surface</div><div class="v">Black + Dark Slate with sparse color</div></div>
+            <div class="tile"><div class="k">Action</div><div class="v">One clear green CTA</div></div>
+            <div class="tile"><div class="k">Tone</div><div class="v">Safety, control, confidence</div></div>
+          </div>
+        </article>
+        <article class="pane">
+          <h3>Expressive Usage</h3><p>Stronger accent families, larger visual jumps, typographic experimentation, same readability floor.</p>
+          <div class="tiles">
+            <div class="tile"><div class="k">Surface</div><div class="v">Neutral base plus one accent family</div></div>
+            <div class="tile"><div class="k">Action</div><div class="v">Green remains anchor color</div></div>
+            <div class="tile"><div class="k">Tone</div><div class="v">Bold but still scannable</div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section" id="a11y">
+      <div class="head"><h2>Accessibility Contrast</h2><p>Quick contrast samples for common dark pairings.</p></div>
+      <table>
+        <thead><tr><th>Foreground</th><th>Background</th><th>Intent</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>#FFFFFF</td><td>#000000</td><td>Primary reading text</td><td class="pass">PASS AAA</td></tr>
+          <tr><td>#B8BDC3</td><td>#141717</td><td>Secondary labels</td><td class="pass">PASS AA</td></tr>
+          <tr><td>#00E013</td><td>#000000</td><td>Action emphasis</td><td class="pass">PASS AA</td></tr>
+          <tr><td>#707678</td><td>#2C2C2C</td><td>Tertiary metadata</td><td class="fail">FAIL</td></tr>
+          <tr><td>#0978FA</td><td>#141717</td><td>Info links</td><td class="pass">PASS AA</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel section" id="states">
+      <div class="head"><h2>Messaging States</h2><p>Behavioral voice across empty, logged-out, confirmation, and warning states.</p></div>
+      <div class="state-grid">
+        <article class="state"><div class="title">Empty State</div><div class="msg">No activity yet. Start a transfer to populate this timeline.</div><a class="cta primary" href="#">Start transfer</a></article>
+        <article class="state"><div class="title">Logged-Out</div><div class="msg">Sign in to view balances, limits, and scheduled transfers.</div><a class="cta" href="#">Sign in</a></article>
+        <article class="state"><div class="title">Confirmation</div><div class="msg">Transfer complete. Funds are now in motion.</div><a class="cta primary" href="#">View receipt</a></article>
+        <article class="state"><div class="title">Warning</div><div class="msg">Payment failed. Retry with updated details or network status.</div><a class="cta" href="#">Try again</a></article>
+      </div>
+    </section>
+
+    <section class="panel section" id="language">
+      <div class="head"><h2>Language Support</h2><p>Stress samples for short and long strings across locales.</p></div>
+      <div class="lang-grid">
+        <article class="lang"><div class="code">EN / Short</div><div class="sample">Pay now</div></article>
+        <article class="lang"><div class="code">EN / Long</div><div class="sample">Confirm recurring transfer and review settlement details</div></article>
+        <article class="lang"><div class="code">DE / Long Compound</div><div class="sample">Wiederkehrende Uberweisungseinstellungen bestaetigen</div></article>
+        <article class="lang"><div class="code">TR / Variable Length</div><div class="sample">Duzenli odeme ayarlarini onayla ve devam et</div></article>
+        <article class="lang"><div class="code">ES / Formal</div><div class="sample">Confirmar transferencia recurrente y continuar</div></article>
+        <article class="lang"><div class="code">FR / Sentence Case</div><div class="sample">Confirmer le virement planifie et poursuivre</div></article>
+      </div>
+    </section>
+
+    <section class="panel section" id="logo">
+      <div class="head"><h2>Logo Variant Specimens</h2><p>Placeholder specimens for wordmark, symbol-only, stacked, and co-brand lockup.</p></div>
+      <div class="logo-grid">
+        <article class="logo"><div class="spec">Wordmark</div><div class="word">Cash App</div></article>
+        <article class="logo"><div class="spec">Symbol-only</div><div class="symbol"></div></article>
+        <article class="logo"><div class="spec">Stacked lockup</div><div class="stack"><div class="symbol"></div><div class="word" style="font-size:23px">Cash App</div></div></article>
+        <article class="logo"><div class="spec">Co-brand lockup</div><div class="lock"><span class="word" style="font-size:21px">Cash App</span><span class="plus">+</span><span>Partner</span></div></article>
+      </div>
+    </section>
+
+    <section class="panel section" id="navs">
+      <div class="head"><h2>Navigation Patterns</h2><p>Desktop index rows and compact mobile navigation sample.</p></div>
+      <div class="nav-demo">
+        <div class="desktop">
+          <div class="links">
+            <a class="link active" href="#">Design essentials</a><a class="link" href="#">Color modes</a><a class="link" href="#">Typography</a><a class="link" href="#">Resources</a>
+          </div>
+          <a class="btn primary" style="min-height:35px;padding:0 12px" href="#">Download</a>
+        </div>
+        <div class="mobile">
+          <div class="mobile-top"><strong style="font-size:14px">Menu</strong><span style="font-size:12px;color:var(--muted)">4 sections</span></div>
+          <div class="tabs"><div class="tab live">Home</div><div class="tab">Pay</div><div class="tab">Cards</div><div class="tab">Profile</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section" id="motion">
+      <div class="head"><h2>Motion Principles</h2><p>Motion should explain state changes and sequence, not act as decorative noise. Reduced-motion preference is respected.</p></div>
+      <div class="motion-grid">
+        <article class="motion"><div class="canvas"><div class="dot g slide"></div></div><p>Lateral motion for transfer progress and direction.</p></article>
+        <article class="motion"><div class="canvas"><div class="dot a pulse"></div></div><p>Pulse for focus or live state acknowledgement.</p></article>
+        <article class="motion"><div class="canvas"><div class="dot m stacked"></div></div><p>Vertical shift for hierarchy reveal and inline transition.</p></article>
+      </div>
+    </section>
+
+    <div class="foot">Single-file dark preview for Cash App DESIGN.md. This page intentionally visualizes palette, typography, usage modes, accessibility checks, messaging states, language handling, logo variants, navigation, and motion.</div>
+  </main>
+</body>
+</html>

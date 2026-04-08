@@ -137,6 +137,7 @@ Each site includes:
 
 ### Fintech & Crypto
 
+- [**Cash App**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/cash.app/) - Consumer finance platform. High-contrast fintech UI, Cash Green accent, warm neo-grotesque typography
 - [**Coinbase**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/coinbase/) - Crypto exchange. Clean blue identity, trust-focused, institutional feel
 - [**Kraken**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/kraken/) - Crypto trading platform. Purple-accented dark UI, data-dense dashboards
 - [**Revolut**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/revolut/) - Digital banking. Sleek dark interface, gradient cards, fintech precision

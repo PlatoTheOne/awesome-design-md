@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Cash App (Light)</title>
+<style>
+  :root {
+    --bg: #f1f4f6;
+    --surface: #ffffff;
+    --surface-soft: #e7eaed;
+    --stroke: #d8dbe1;
+    --text: #000000;
+    --text-muted: #707678;
+    --text-soft: #939a9e;
+    --cash-green: #00e013;
+    --cash-green-strong: #00bf2c;
+    --cash-green-soft: #91ffb0;
+    --azure: #0978fa;
+    --cobalt: #3859ff;
+    --citron: #d8ff14;
+    --orange: #ff713a;
+    --magenta: #ff2acc;
+    --purple: #ab30f7;
+    --scarlet: #ed3434;
+    --gold: #fed31c;
+    --mono: "Cash Sans Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: "Cash Sans", "Sohne", "Helvetica Neue", Arial, sans-serif;
+    --wide: "Cash Sans Wide", "Cash Sans", "Sohne", "Helvetica Neue", Arial, sans-serif;
+    --shadow: 0 12px 34px rgba(0, 0, 0, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 92% -6%, rgba(0, 224, 19, 0.20), transparent 35%),
+      radial-gradient(circle at 4% 9%, rgba(171, 48, 247, 0.12), transparent 30%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.45;
+  }
+
+  .page {
+    width: min(1220px, 100% - 32px);
+    margin: 20px auto 48px;
+  }
+
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--stroke);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: clamp(22px, 4vw, 42px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: -80px -120px auto auto;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 224, 19, 0.30), rgba(0, 224, 19, 0));
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    background: #000;
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    margin: 16px 0 12px;
+    font-family: var(--wide);
+    font-size: clamp(46px, 8.4vw, 90px);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    max-width: 9ch;
+  }
+
+  .hero-copy {
+    max-width: 62ch;
+    margin: 0;
+    color: #4a4f4f;
+    font-size: clamp(16px, 2.4vw, 22px);
+    line-height: 1.3;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .btn-primary {
+    background: var(--cash-green);
+    color: #000;
+  }
+
+  .btn-secondary {
+    background: #000;
+    color: #fff;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--stroke);
+    color: #353838;
+  }
+
+  .section {
+    margin-top: 22px;
+    background: var(--surface);
+    border: 1px solid var(--stroke);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: clamp(18px, 2.8vw, 28px);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .section h2 {
+    margin: 0;
+    font-family: var(--wide);
+    font-size: clamp(26px, 4.2vw, 46px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  .section-note {
+    max-width: 48ch;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    gap: 10px;
+  }
+
+  .swatch {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .swatch-color {
+    height: 72px;
+  }
+
+  .swatch-info {
+    padding: 10px;
+  }
+
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+
+  .swatch-meta {
+    margin: 0;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+
+  .typo-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .typo-row {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+  }
+
+  .display-line {
+    margin: 0;
+    font-family: var(--wide);
+    font-size: clamp(40px, 6vw, 74px);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+  }
+
+  .heading-line {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1;
+  }
+
+  .body-line {
+    margin: 0;
+    font-size: 16px;
+    max-width: 68ch;
+    color: #4a4f4f;
+  }
+
+  .mono-line {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .typo-meta {
+    margin: 8px 0 0;
+    color: var(--text-soft);
+    font-size: 11px;
+    font-family: var(--mono);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    border: 1px solid var(--stroke);
+    border-radius: 14px;
+    background: #fff;
+    padding: 14px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: #000;
+    color: #fff;
+  }
+
+  .card h3 {
+    margin: 10px 0 8px;
+    font-size: 20px;
+    line-height: 1.1;
+  }
+
+  .card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .expressive {
+    background:
+      linear-gradient(165deg, rgba(9, 120, 250, 0.11), rgba(255, 42, 204, 0.12)),
+      #fff;
+  }
+
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .contrast-sample {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .contrast-plate {
+    min-height: 86px;
+    padding: 10px;
+    display: grid;
+    align-content: center;
+  }
+
+  .contrast-label {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .contrast-sub {
+    margin: 4px 0 0;
+    font-size: 11px;
+    font-family: var(--mono);
+  }
+
+  .verdict {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #fff;
+  }
+
+  .pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    color: #353838;
+  }
+
+  .pill.pass {
+    background: #ecfff3;
+    border-color: #00bf2c;
+  }
+
+  .pill.warn {
+    background: #fff4f0;
+    border-color: #ff713a;
+  }
+
+  .state-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .state {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .state .tag { background: #353838; }
+
+  .state-title {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .state-copy {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .state-cta {
+    min-height: 34px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--cash-green);
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    width: fit-content;
+  }
+
+  .language-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .language {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .lang-name {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .lang-sample {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .logo-card {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px;
+    display: grid;
+    gap: 10px;
+    min-height: 136px;
+  }
+
+  .logo-stage {
+    flex: 1;
+    border: 1px dashed #c1c5cb;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    padding: 8px;
+    min-height: 78px;
+  }
+
+  .logo-mark {
+    font-family: var(--wide);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .logo-symbol {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: #000;
+    color: var(--cash-green);
+    font-family: var(--wide);
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .nav-showcase {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 10px;
+  }
+
+  .nav-surface {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .top-nav {
+    min-height: 56px;
+    border-bottom: 1px solid var(--stroke);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .top-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .top-link {
+    min-height: 32px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    color: #4a4f4f;
+  }
+
+  .top-link.active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .side-nav {
+    padding: 10px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .nav-row {
+    min-height: 33px;
+    border: 1px solid var(--stroke);
+    border-radius: 8px;
+    background: #fff;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #4a4f4f;
+  }
+
+  .nav-row.active {
+    border-color: var(--cash-green-strong);
+    background: #f5fff8;
+    color: #000;
+  }
+
+  .nav-row.sub {
+    margin-left: 20px;
+  }
+
+  .mobile-nav {
+    border-top: 1px solid var(--stroke);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .mobile-item {
+    min-height: 48px;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-right: 1px solid var(--stroke);
+  }
+
+  .mobile-item:last-child { border-right: 0; }
+  .mobile-item.active {
+    background: #f5fff8;
+    color: #000;
+    font-weight: 700;
+  }
+
+  .motion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .motion-card {
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px;
+  }
+
+  .motion-demo {
+    min-height: 74px;
+    border: 1px dashed #c1c5cb;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: #f8fafb;
+  }
+
+  .pulse-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--cash-green);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  .slide-chip {
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    animation: slide 2.2s ease-in-out infinite;
+  }
+
+  .bar-wrap {
+    width: 76%;
+    height: 8px;
+    background: #e7eaed;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    width: 58%;
+    background: linear-gradient(90deg, var(--cash-green), var(--azure));
+    animation: widen 2.1s ease-in-out infinite;
+  }
+
+  .motion-title {
+    margin: 0 0 4px;
+    font-size: 15px;
+  }
+
+  .motion-copy {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .footer {
+    margin-top: 16px;
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 12px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.45); opacity: 0.55; }
+  }
+
+  @keyframes slide {
+    0%, 100% { transform: translateX(-16px); }
+    50% { transform: translateX(16px); }
+  }
+
+  @keyframes widen {
+    0%, 100% { width: 30%; }
+    50% { width: 88%; }
+  }
+
+  @media (max-width: 1020px) {
+    .two-col,
+    .contrast-grid,
+    .state-grid,
+    .language-grid,
+    .logo-grid,
+    .motion-grid,
+    .nav-showcase {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .page { width: min(1220px, 100% - 18px); }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .two-col,
+    .contrast-grid,
+    .state-grid,
+    .language-grid,
+    .logo-grid,
+    .motion-grid,
+    .nav-showcase {
+      grid-template-columns: 1fr;
+    }
+    .hero-copy { font-size: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <span class="eyebrow">Cash App / Light Preview</span>
+      <h1>Order first. Energy on cue.</h1>
+      <p class="hero-copy">This preview mirrors the broader source system: core and extended color logic, expressive typography, everyday and campaign behavior, accessibility checks, messaging states, language support, logo variants, navigation patterns, and motion guidelines.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">Primary Action</a>
+        <a class="btn btn-secondary" href="#">Secondary Action</a>
+        <a class="btn btn-ghost" href="#">Spec Sheet</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Core Palette</h2>
+        <p class="section-note">Cash Green stays the key recall signal. Neutrals carry structure and readability before accents enter the scene.</p>
+      </div>
+      <div class="palette-grid">
+        <article class="swatch"><div class="swatch-color" style="background:#00e013;"></div><div class="swatch-info"><p class="swatch-name">Cash Green</p><p class="swatch-meta">#00E013</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#00bf2c;"></div><div class="swatch-info"><p class="swatch-name">Cash Green Strong</p><p class="swatch-meta">#00BF2C</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#91ffb0;"></div><div class="swatch-info"><p class="swatch-name">Cash Green Soft</p><p class="swatch-meta">#91FFB0</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#f1f4f6;"></div><div class="swatch-info"><p class="swatch-name">Gray 1</p><p class="swatch-meta">#F1F4F6</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#d8dbe1;"></div><div class="swatch-info"><p class="swatch-name">Gray 4</p><p class="swatch-meta">#D8DBE1</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#707678;"></div><div class="swatch-info"><p class="swatch-name">Gray 15</p><p class="swatch-meta">#707678</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#353838;"></div><div class="swatch-info"><p class="swatch-name">Gray 18</p><p class="swatch-meta">#353838</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#000000;"></div><div class="swatch-info"><p class="swatch-name">Black</p><p class="swatch-meta">#000000</p></div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Extended Palette Families</h2>
+        <p class="section-note">The source system includes full color families. Keep them coherent and intentional instead of mixing randomly.</p>
+      </div>
+      <div class="palette-grid">
+        <article class="swatch"><div class="swatch-color" style="background:#0978fa;"></div><div class="swatch-info"><p class="swatch-name">Azure H1</p><p class="swatch-meta">#0978FA</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#3859ff;"></div><div class="swatch-info"><p class="swatch-name">Cobalt H3</p><p class="swatch-meta">#3859FF</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#d8ff14;"></div><div class="swatch-info"><p class="swatch-name">Citron</p><p class="swatch-meta">#D8FF14</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#ff713a;"></div><div class="swatch-info"><p class="swatch-name">Orange H1</p><p class="swatch-meta">#FF713A</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#ff2acc;"></div><div class="swatch-info"><p class="swatch-name">Magenta H4</p><p class="swatch-meta">#FF2ACC</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#ab30f7;"></div><div class="swatch-info"><p class="swatch-name">Purple H3</p><p class="swatch-meta">#AB30F7</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#ed3434;"></div><div class="swatch-info"><p class="swatch-name">Scarlet H1</p><p class="swatch-meta">#ED3434</p></div></article>
+        <article class="swatch"><div class="swatch-color" style="background:#fed31c;"></div><div class="swatch-info"><p class="swatch-name">Gold H1</p><p class="swatch-meta">#FED31C</p></div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Typography Scale</h2>
+        <p class="section-note">Display stays wide and decisive. Mono is for utility labels and technical notes, not expressive headlines.</p>
+      </div>
+      <div class="typo-list">
+        <article class="typo-row">
+          <p class="display-line">Cash moves on clarity.</p>
+          <p class="typo-meta">Page Title / Cash Sans Wide / 90px / tracking -3%</p>
+        </article>
+        <article class="typo-row">
+          <p class="heading-line">Readable at full volume.</p>
+          <p class="typo-meta">Section Heading / Cash Sans / 48px / compact line-height</p>
+        </article>
+        <article class="typo-row">
+          <p class="body-line">The everyday voice stays calm and direct. In expressive moments, composition and contrast can push harder while preserving legibility.</p>
+          <p class="typo-meta">Body / Cash Sans / 14-16px</p>
+        </article>
+        <article class="typo-row">
+          <p class="mono-line">spec label / utility id / timestamp / token</p>
+          <p class="typo-meta">Mono / Cash Sans Mono / 10-14px / utility only</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Everyday vs Expressive</h2>
+        <p class="section-note">The source system separates stable product surfaces from expressive campaign treatment. Both belong, but not in the same intensity.</p>
+      </div>
+      <div class="two-col">
+        <article class="card">
+          <span class="tag">Everyday Usage</span>
+          <h3>Product surfaces stay steady.</h3>
+          <p>Use neutral backgrounds, direct labels, and clear action hierarchy. The goal is confidence and control.</p>
+        </article>
+        <article class="card expressive">
+          <span class="tag">Expressive Usage</span>
+          <h3>Campaign surfaces can push.</h3>
+          <p>Use one strong accent family, larger display type, and more dramatic contrast while keeping key information readable.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Accessibility Contrast</h2>
+        <p class="section-note">Contrast is functional, not optional. Samples below show stronger and weaker pairings that mirror pass/fail style checks.</p>
+      </div>
+      <div class="contrast-grid">
+        <article class="contrast-sample">
+          <div class="contrast-plate" style="background:#ffffff;color:#000000;">
+            <p class="contrast-label">Primary Text</p>
+            <p class="contrast-sub">#000 on #fff</p>
+          </div>
+          <div class="verdict"><span class="pill pass">AAA</span><span class="swatch-meta">Reliable body pair</span></div>
+        </article>
+        <article class="contrast-sample">
+          <div class="contrast-plate" style="background:#00e013;color:#000000;">
+            <p class="contrast-label">Cash Green Action</p>
+            <p class="contrast-sub">#000 on #00E013</p>
+          </div>
+          <div class="verdict"><span class="pill pass">AA+</span><span class="swatch-meta">High emphasis CTA</span></div>
+        </article>
+        <article class="contrast-sample">
+          <div class="contrast-plate" style="background:#d8dbe1;color:#939a9e;">
+            <p class="contrast-label">Muted Metadata</p>
+            <p class="contrast-sub">#939A9E on #D8DBE1</p>
+          </div>
+          <div class="verdict"><span class="pill warn">Low</span><span class="swatch-meta">Decorative only</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Messaging States</h2>
+        <p class="section-note">Brand voice must hold in low-attention and high-stakes moments: empty, confirmation, timeout, and transactional touchpoints.</p>
+      </div>
+      <div class="state-grid">
+        <article class="state">
+          <span class="tag">Empty State</span>
+          <h3 class="state-title">No activity yet</h3>
+          <p class="state-copy">Start with a small transfer and build your history from here.</p>
+          <span class="state-cta">Send your first payment</span>
+        </article>
+        <article class="state">
+          <span class="tag">Confirmation</span>
+          <h3 class="state-title">Payment complete</h3>
+          <p class="state-copy">$48.00 sent to Alex at 2:41 PM. Receipt and trace code are ready.</p>
+          <span class="state-cta">View receipt</span>
+        </article>
+        <article class="state">
+          <span class="tag">Timeout</span>
+          <h3 class="state-title">Session paused</h3>
+          <p class="state-copy">For your safety, we signed you out after inactivity. Resume in one tap.</p>
+          <span class="state-cta">Continue securely</span>
+        </article>
+        <article class="state">
+          <span class="tag">Transactional Email</span>
+          <h3 class="state-title">Transfer scheduled</h3>
+          <p class="state-copy">Your transfer to Savings is set for Friday, with one-day notification.</p>
+          <span class="state-cta">Manage schedule</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Language Support</h2>
+        <p class="section-note">Layouts should survive variable text length and script shape. Keep cards, buttons, and labels resilient.</p>
+      </div>
+      <div class="language-grid">
+        <article class="language">
+          <p class="lang-name">EN-US</p>
+          <p class="lang-sample">Your transfer is on the way. Track status in Activity.</p>
+        </article>
+        <article class="language">
+          <p class="lang-name">ES-419</p>
+          <p class="lang-sample">Tu transferencia ya esta en camino. Revisa el estado en Actividad.</p>
+        </article>
+        <article class="language">
+          <p class="lang-name">DE-DE</p>
+          <p class="lang-sample">Deine Uberweisung wurde geplant. Verfolge den Status unter Aktivitat.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Logo Variant Specimens</h2>
+        <p class="section-note">Variant selection should respond to background contrast, density, and co-branding context.</p>
+      </div>
+      <div class="logo-grid">
+        <article class="logo-card">
+          <span class="tag">Wordmark</span>
+          <div class="logo-stage"><div class="logo-mark">Cash App</div></div>
+        </article>
+        <article class="logo-card">
+          <span class="tag">Symbol</span>
+          <div class="logo-stage"><div class="logo-symbol">$</div></div>
+        </article>
+        <article class="logo-card">
+          <span class="tag">Stacked Lockup</span>
+          <div class="logo-stage"><div class="logo-mark" style="font-size:19px;text-align:center;">Cash<br>App</div></div>
+        </article>
+        <article class="logo-card">
+          <span class="tag">Co-Brand</span>
+          <div class="logo-stage">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="logo-symbol" style="width:34px;height:34px;font-size:18px;">$</div>
+              <div style="width:1px;height:24px;background:#c1c5cb;"></div>
+              <div style="font-weight:700;">Partner</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Navigation Patterns</h2>
+        <p class="section-note">Use clear hierarchy in desktop rails and maintain obvious active states in mobile tabs.</p>
+      </div>
+      <div class="nav-showcase">
+        <article class="nav-surface">
+          <div class="top-nav">
+            <div style="font-weight:700;">Cash App</div>
+            <div class="top-links">
+              <span class="top-link active">Home</span>
+              <span class="top-link">Cards</span>
+              <span class="top-link">Activity</span>
+              <span class="top-link">Security</span>
+            </div>
+            <span class="top-link">Account</span>
+          </div>
+          <div style="padding:10px;">
+            <div class="nav-row active"><span>Design Essentials</span><span>01</span></div>
+            <div class="nav-row sub"><span>Color Modes</span><span>01.2</span></div>
+            <div class="nav-row sub"><span>Accessibility</span><span>01.3</span></div>
+            <div class="nav-row"><span>Typography</span><span>02</span></div>
+            <div class="nav-row"><span>Messaging</span><span>04</span></div>
+          </div>
+        </article>
+        <article class="nav-surface">
+          <div style="padding:10px 10px 0;">
+            <p class="swatch-meta" style="margin:0 0 8px;">Mobile Tabs</p>
+          </div>
+          <div class="mobile-nav">
+            <div class="mobile-item active">Pay</div>
+            <div class="mobile-item">Cards</div>
+            <div class="mobile-item">Activity</div>
+            <div class="mobile-item">Profile</div>
+          </div>
+          <div style="padding:10px;">
+            <p class="swatch-meta" style="margin:0;">Compact rows keep 33-35px rhythm and explicit active highlighting.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Motion Principles</h2>
+        <p class="section-note">Motion should explain state changes and sequence, not act as decorative noise.</p>
+      </div>
+      <div class="motion-grid">
+        <article class="motion-card">
+          <div class="motion-demo"><div class="pulse-dot"></div></div>
+          <h3 class="motion-title">Status Pulse</h3>
+          <p class="motion-copy">Use short pulse loops for live or in-progress states.</p>
+        </article>
+        <article class="motion-card">
+          <div class="motion-demo"><div class="slide-chip">Sequence Step</div></div>
+          <h3 class="motion-title">Direction Cue</h3>
+          <p class="motion-copy">Guide attention laterally when demonstrating flow steps.</p>
+        </article>
+        <article class="motion-card">
+          <div class="motion-demo"><div class="bar-wrap"><div class="bar-fill"></div></div></div>
+          <h3 class="motion-title">Progress Feedback</h3>
+          <p class="motion-copy">Animate throughput and completion with restrained timing.</p>
+        </article>
+      </div>
+    </section>
+
+    <p class="footer">Cash App DESIGN.md preview / light mode / self-contained single-file reference.</p>
+  </main>
+</body>
+</html>
